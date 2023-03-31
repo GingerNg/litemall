@@ -65,7 +65,7 @@ public class AdminAuthorizingRealm extends AuthorizingRealm {
         }
         LitemallAdmin admin = adminList.get(0);
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();  // 加密
         if (!encoder.matches(password, admin.getPassword())) {
             throw new UnknownAccountException("找不到用户（" + username + "）的帐号信息");
         }

@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/user/list',
+    url: '/user/list', // 后端的path http://XX.XX.XX.XX:8083/admin/user/list
     method: 'get',
     params: query
   })

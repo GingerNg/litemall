@@ -609,6 +609,39 @@ export const asyncRouterMap = [
     ],
     hidden: true
   },
+  {
+    path: '/file',
+    component: Layout,
+    redirect: 'noredirect',
+    alwaysShow: true,
+    name: 'fileManage',
+    meta: {
+      title: '文件管理',
+      icon: 'chart'
+    },
+    children: [
+      {
+        path: 'manage',
+        component: () => import('@/views/file/manage'),
+        name: 'manage',
+        meta: {
+          perms: ['GET /admin/file/list'],
+          title: '文件管理',
+          noCache: true
+        }
+      },
+      {
+        path: 'upload',
+        component: () => import('@/views/file/upload'),
+        name: 'upload',
+        meta: {
+          perms: ['GET /admin/file/upload'],
+          title: '文件上传',
+          noCache: true
+        }
+      }
+    ]
+  },
 
   { path: '*', redirect: '/404', hidden: true }
 ]

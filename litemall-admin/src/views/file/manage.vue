@@ -17,11 +17,11 @@
 
       <el-table-column align="center" label="手机号码" prop="mobile" />
 
-      <!-- <el-table-column align="center" label="性别" prop="gender">
+      <el-table-column align="center" label="性别" prop="gender">
         <template slot-scope="scope">
-          <el-tag >{{ genderDic[scope.row.gender] }}</el-tag>
+          <el-tag>{{ genderDic[scope.row.gender] }}</el-tag>
         </template>
-      </el-table-column> -->
+      </el-table-column>
 
       <el-table-column align="center" label="生日" prop="birthday" />
 

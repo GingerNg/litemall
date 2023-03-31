@@ -15,6 +15,7 @@ import org.linlinjava.litemall.admin.util.PermissionUtil;
 import org.linlinjava.litemall.core.util.IpUtil;
 import org.linlinjava.litemall.core.util.JacksonUtil;
 import org.linlinjava.litemall.core.util.ResponseUtil;
+import org.linlinjava.litemall.core.util.bcrypt.BCryptPasswordEncoder;
 import org.linlinjava.litemall.db.domain.LitemallAdmin;
 import org.linlinjava.litemall.db.service.LitemallAdminService;
 import org.linlinjava.litemall.db.service.LitemallPermissionService;
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import static org.linlinjava.litemall.admin.util.AdminResponseCode.ADMIN_INVALID_ACCOUNT;
+import static org.linlinjava.litemall.admin.util.AdminResponseCode.*;
 
 @RestController
 @RequestMapping("/admin/auth")
@@ -46,6 +47,69 @@ public class AdminAuthController {
     @Autowired
     private LogHelper logHelper;
 
+    @PostMapping("/register")
+    public Object register(@RequestBody String body, HttpServletRequest request) {
+        String username = JacksonUtil.parseString(body, "username");
+        String password = JacksonUtil.parseString(body, "password");
+
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+            return ResponseUtil.badArgument();
+        }
+
+        // 不能重复注册--管理员名称不能重复注册
+        List<LitemallAdmin> adminList = adminService.findAdmin(username);
+        if (adminList.size() > 0) {
+            return ResponseUtil.fail(AUTH_NAME_REGISTERED, "用户名已注册");
+        }
+
+        // 密码不能为空，且长度必须大于6位
+
+        LitemallAdmin admin = null;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(password);
+        admin = new LitemallAdmin();
+        admin.setUsername(username);
+        admin.setPassword(encodedPassword);
+        admin.setAvatar("https://yanxuan.nosdn.127.net/80841d741d7fa3073e0ae27bf487339f.jpg?imageView&quality=90&thumbnail=64x64");
+
+        adminService.add(admin);
+        //
+
+
+        Subject currentUser = SecurityUtils.getSubject();
+        try {
+            currentUser.login(new UsernamePasswordToken(username, password));  //
+        } catch (UnknownAccountException uae) {
+            logHelper.logAuthFail("登录", "用户帐号或密码不正确");
+            return ResponseUtil.fail(ADMIN_INVALID_ACCOUNT, "用户帐号或密码不正确");
+        } catch (LockedAccountException lae) {
+            logHelper.logAuthFail("登录", "用户帐号已锁定不可用");
+            return ResponseUtil.fail(ADMIN_INVALID_ACCOUNT, "用户帐号已锁定不可用");
+
+        } catch (AuthenticationException ae) {
+            logHelper.logAuthFail("登录", "认证失败");
+            return ResponseUtil.fail(ADMIN_INVALID_ACCOUNT, "认证失败");
+        }
+
+        // currentUser = SecurityUtils.getSubject();
+        // LitemallAdmin admin = (LitemallAdmin) currentUser.getPrincipal();
+        // admin.setLastLoginIp(IpUtil.getIpAddr(request));
+        // admin.setLastLoginTime(LocalDateTime.now());
+        // adminService.updateById(admin);
+
+        // logHelper.logAuthSucceed("登录");
+
+        // userInfo
+        Map<String, Object> adminInfo = new HashMap<String, Object>();
+        adminInfo.put("nickName", admin.getUsername());
+        adminInfo.put("avatar", admin.getAvatar());
+
+        Map<Object, Object> result = new HashMap<Object, Object>();
+        result.put("token", currentUser.getSession().getId());
+        result.put("adminInfo", adminInfo);
+        return ResponseUtil.ok(result);
+    }
+
     /*
      *  { username : value, password : value }
      */
@@ -60,7 +124,7 @@ public class AdminAuthController {
 
         Subject currentUser = SecurityUtils.getSubject();
         try {
-            currentUser.login(new UsernamePasswordToken(username, password));
+            currentUser.login(new UsernamePasswordToken(username, password));  //
         } catch (UnknownAccountException uae) {
             logHelper.logAuthFail("登录", "用户帐号或密码不正确");
             return ResponseUtil.fail(ADMIN_INVALID_ACCOUNT, "用户帐号或密码不正确");
