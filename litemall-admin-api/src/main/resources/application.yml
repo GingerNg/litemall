@@ -4,6 +4,8 @@ spring:
   messages:
     encoding: UTF-8
 
+user.filepath: /home/ubuntu/Projects/litemall/storage/
+
 server:
   port: 8083
 

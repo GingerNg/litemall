@@ -24,6 +24,23 @@ mvn clean package # 在项目根目录打包
 - 使用Shiro实现login的过程
 
 ### class4
+- 登陆前，登陆后，哪些页面是不登陆就可以访问的？如何设置？Why？
+- 显示服务器上的一张图片
+- java.io.File vs java.nio.file.Files
+- AdminStorageController.create()
+- WxStorageController.fetch()
+- litemall-core/src/main/java/org/linlinjava/litemall/core/storage/config
+通过配置文件, 设置文件的存储方式
+接口-class
+
+org.springframework.core.io.Resource
+
 - WxAuthController
+- 图片上传
 - BCryptPasswordEncoder 加密算法
-- 图片上传，获取公网链接
+
+
+### Mybatis
+- Configure
+- Create your MyBatis mapper interfaces and XML files that define your SQL queries.
+- Annotate your mapper interfaces with @Mapper to make them discoverable by Spring

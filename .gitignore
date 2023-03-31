@@ -16,7 +16,7 @@ bin/
 ### IntelliJ IDEA ###
 /.idea/
 /private/
-/storage/
+# /storage/
 /litemall.iml
 .checkstyle
 .idea
