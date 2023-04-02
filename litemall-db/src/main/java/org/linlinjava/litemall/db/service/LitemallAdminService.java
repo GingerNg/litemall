@@ -19,6 +19,7 @@ public class LitemallAdminService {
     private LitemallAdminMapper adminMapper;
 
     public List<LitemallAdmin> findAdmin(String username) {
+        // sql: select * from tablename user-name == username
         LitemallAdminExample example = new LitemallAdminExample();
         example.or().andUsernameEqualTo(username).andDeletedEqualTo(false);
         return adminMapper.selectByExample(example);

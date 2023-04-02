@@ -15,28 +15,11 @@
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input v-model="loginForm.password" :type="passwordType" name="password" auto-complete="on" tabindex="2" show-password placeholder="管理员密码" @keyup.enter.native="handleLogin" />
+        <el-input v-model="loginForm.password" :type="passwordType" name="password" auto-complete="on" tabindex="2" show-password placeholder="管理员密码" @keyup.enter.native="handleRegister" />
       </el-form-item>
 
-      <div class="buttons">
-        <span><el-button :loading="loading" type="primary" style="width:49.5%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button></span>
-        <span><el-button style="width:49.5%;margin-bottom:30px;"><a href="#/register">切换注册界面</a></el-button></span>
-      </div>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleRegister">注册</el-button>
 
-      <div style="position:relative">
-        <div class="tips">
-          <span> 超级管理员用户名: admin123</span>
-          <span> 超级管理员用户名：admin123</span>
-        </div>
-        <div class="tips">
-          <span> 商城管理员用户名: mall123</span>
-          <span> 商城管理员用户名：mall123</span>
-        </div>
-        <div class="tips">
-          <span> 推广管理员用户名: promotion123</span>
-          <span> 推广管理员用户名：promotion123</span>
-        </div>
-      </div>
     </el-form>
 
     <div class="copyright">
@@ -88,20 +71,22 @@ export default {
     // window.removeEventListener('hashchange', this.afterQRScan)
   },
   methods: {
-    handleLogin() {
+    handleRegister() {
       this.$refs.loginForm.validate(valid => {
         if (valid && !this.loading) {
           this.loading = true
-          this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
-            this.loading = false
-            this.$router.push({ path: this.redirect || '/' })
-          }).catch(response => {
-            this.$notify.error({
-              title: '失败',
-              message: response.data.errmsg
-            })
-            this.loading = false
-          })
+          this.loading = false
+          this.$router.push({ path: this.redirect || '/' })
+
+          // this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+
+          // }).catch(response => {
+          //   this.$notify.error({
+          //     title: '失败',
+          //     message: response.data.errmsg
+          //   })
+          //   this.loading = false
+          // })
         } else {
           return false
         }

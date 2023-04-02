@@ -24,7 +24,7 @@ mvn clean package # 在项目根目录打包
 - 使用Shiro实现login的过程
 
 ### class4
-- 登陆前，登陆后，哪些页面是不登陆就可以访问的？如何设置？Why？
+- 图片上传
 - 显示服务器上的一张图片
 - java.io.File vs java.nio.file.Files
 - AdminStorageController.create()
@@ -36,9 +36,20 @@ mvn clean package # 在项目根目录打包
 org.springframework.core.io.Resource
 
 - WxAuthController
-- 图片上传
+
 - BCryptPasswordEncoder 加密算法
 
+### class5
+- url中的#符号
+在VUE中，路由的实现方式有两种，其中一种就是通过#标识符进行页面内导航从而实现路由切换
+[Vue路由切换的两种方式](https://blog.csdn.net/qq_51133939/article/details/126282421)
+
+
+### 权限管理
+- Shiro
+- 登陆前，登陆后，哪些页面是不登陆就可以访问的？如何设置？Why？
+- 后端
+- 前端，
 
 ### Mybatis
 - Configure

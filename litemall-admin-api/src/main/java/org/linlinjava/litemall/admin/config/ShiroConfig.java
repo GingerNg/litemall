@@ -36,6 +36,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/admin/index/index", "anon");
         filterChainDefinitionMap.put("/admin/img/*", "anon"); // 不做权限校验
         filterChainDefinitionMap.put("/admin/imgV2/*", "anon"); // 不做权限校验
+        filterChainDefinitionMap.put("/admin/auth/register", "anon");
 
         filterChainDefinitionMap.put("/admin/**", "authc");
         shiroFilterFactoryBean.setLoginUrl("/admin/auth/401");

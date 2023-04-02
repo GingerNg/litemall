@@ -27,13 +27,16 @@ public class AdminImgV2Controller implements WebMvcConfigurer{
     public Object upload_v1(@RequestParam("file") MultipartFile file) throws IOException {
         // String filePath = "/home/ubuntu/Projects/litemall/storage/"; //  文件夹路径
         // 生成一个随机的名称，避免文件名重复
+        // 加入我们我要实现一个需求： 相同的文件（可能是不同的文件名），多次上传，只存一份？？
+        // 文件夹里 文件--->MD5---> ID
+        // 秒传功能
         UUID uuid = UUID.randomUUID();
         // 获取原文件名称
-        String originalFileName = file.getOriginalFilename();
+        String originalFileName = file.getOriginalFilename();  // 文件名
         // 获取原文件的后缀
-        String fileSuffix = originalFileName.substring(originalFileName.lastIndexOf('.'));
+        String fileSuffix = originalFileName.substring(originalFileName.lastIndexOf('.'));  // 截取字符串
         // 保存文件
-        File saveFile = new File(filePath + uuid + fileSuffix);
+        File saveFile = new File(filePath + uuid + fileSuffix);  // 目录+uuid+后缀
         try {
             file.transferTo(saveFile);
         } catch (IOException e) {
