@@ -98,7 +98,7 @@ litemall = Spring Boot后端 + Vue管理员前端 + 微信小程序用户前端 
     * [Maven](https://maven.apache.org/download.cgi)
     * [Nodejs](https://nodejs.org/en/download/)
     * [微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
-    
+
 2. 数据库依次导入litemall-db/sql下的数据库文件
     * litemall_schema.sql
     * litemall_table.sql
@@ -113,7 +113,7 @@ litemall = Spring Boot后端 + Vue管理员前端 + 微信小程序用户前端 
     mvn clean package
     java -Dfile.encoding=UTF-8 -jar litemall-all/target/litemall-all-0.1.0-exec.jar
     ```
-    
+
 4. 启动管理后台前端
 
     打开命令行，输入以下命令
@@ -124,16 +124,16 @@ litemall = Spring Boot后端 + Vue管理员前端 + 微信小程序用户前端 
     npm run dev
     ```
     此时，浏览器打开，输入网址`http://localhost:9527`, 此时进入管理后台登录页面。
-    
+
 5. 启动小商城前端
-   
+
    这里存在两套小商场前端litemall-wx和renard-wx，开发者可以分别导入和测试：
-   
+
    1. 微信开发工具导入litemall-wx项目;
    2. 项目配置，启用“不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书”
    3. 点击“编译”，即可在微信开发工具预览效果；
    4. 也可以点击“预览”，然后手机扫描登录（但是手机需开启调试功能）。
-      
+
    注意：
    > 这里只是最简启动方式，而小商场的微信登录、微信支付等功能需开发者设置才能运行，
    > 更详细方案请参考[文档](https://linlinjava.gitbook.io/litemall/project)。
@@ -151,7 +151,7 @@ litemall = Spring Boot后端 + Vue管理员前端 + 微信小程序用户前端 
 
     注意：
     > 现在功能很不稳定，处在开发阶段。
-        
+
 ## 开发计划
 
 当前版本[v1.7.0](https://linlinjava.gitbook.io/litemall/changelog)
@@ -192,14 +192,14 @@ V 3.0.0 完成以下目标：
    项目介绍：基于Node.js+MySQL开发的开源微信小程序商城（微信小程序）
 
    项目参考：
-   
+
    1. litemall项目数据库基于nideshop-mini-program项目数据库；
    2. litemall项目的litemall-wx模块基于nideshop-mini-program开发。
 
 2. [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-  
+
    项目介绍： 一个基于Vue和Element的后台集成方案
-  
+
    项目参考：litemall项目的litemall-admin模块的前端框架基于vue-element-admin项目修改扩展。
 
 3. [mall-admin-web](https://github.com/macrozheng/mall-admin-web)
@@ -223,9 +223,9 @@ V 3.0.0 完成以下目标：
 ## 推荐
 
 1. [Flutter_Mall](https://github.com/youxinLu/mall)
-   
+
    项目介绍：Flutter_Mall是一款Flutter开源在线商城应用程序。
-   
+
 2. [Taro_Mall](https://github.com/jiechud/taro-mall)
 
     项目介绍：Taro_Mall是一款多端开源在线商城应用程序，后台是基于litemall基础上进行开发，前端采用Taro框架编写。
@@ -248,3 +248,10 @@ V 3.0.0 完成以下目标：
 
 [MIT](https://github.com/liutaojava/litemall/blob/master/LICENSE)
 Copyright (c) 2018-present linlinjava
+
+
+## Learning Material
+- https://github.com/macrozheng/mall
+mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于SpringBoot+MyBatis实现，采用Docker容器化部署。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。
+
+

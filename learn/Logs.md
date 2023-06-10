@@ -40,9 +40,18 @@ org.springframework.core.io.Resource
 - BCryptPasswordEncoder 加密算法
 
 ### class5
+- 复习
+- AOP
+
+
+### class6
+
 - url中的#符号
 在VUE中，路由的实现方式有两种，其中一种就是通过#标识符进行页面内导航从而实现路由切换
 [Vue路由切换的两种方式](https://blog.csdn.net/qq_51133939/article/details/126282421)
+
+
+
 
 
 ### 权限管理
@@ -55,3 +64,14 @@ org.springframework.core.io.Resource
 - Configure
 - Create your MyBatis mapper interfaces and XML files that define your SQL queries.
 - Annotate your mapper interfaces with @Mapper to make them discoverable by Spring
+
+
+
+
+
+kickoff
+
+login-register + 文件上传+显示+下载 ---> 大作业1
+                            + 分页  ---> 大作业2
+
+请求外部接口

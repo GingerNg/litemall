@@ -10,9 +10,13 @@ server:
   port: 8083
 
 logging:
-  level:
-    root:  INFO
-    org.springframework:  DEBUG
-    org.mybatis:  DEBUG
-    org.linlinjava.litemall.admin:  DEBUG
-    org.linlinjava.litemall:  ERROR
+  config: classpath:logback-spring.xml
+
+# logging:
+#   level:
+#     org.springframework:  DEBUG
+#     org.mybatis:  DEBUG
+#     org.linlinjava.litemall.admin:  ERROR
+#     org.linlinjava.litemall:  ERROR
+#   file:
+#       "logs"

@@ -83,6 +83,38 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
+  // {
+  //   path: '/amap',
+  //   component: Layout,
+  //   redirect: 'noredirect',
+  //   alwaysShow: true,
+  //   name: 'amapShow',
+  //   meta: {
+  //     title: '地图',
+  //     icon: 'chart'
+  //   },
+  //   children: [
+  //     {
+  //       path: 'home',
+  //       component: () => import('@/views/amap/home'),
+  //       name: 'region',
+  //       meta: {
+  //         title: '地图home',
+  //         noCache: true
+  //       }
+  //     },
+  //     {
+  //       path: 'marker',
+  //       component: () => import('@/views/amap/marker'),
+  //       name: 'brand',
+  //       meta: {
+  //         perms: ['GET /admin/brand/list', 'POST /admin/brand/create', 'GET /admin/brand/read', 'POST /admin/brand/update', 'POST /admin/brand/delete'],
+  //         title: '地图marker',
+  //         noCache: true
+  //       }
+  //     }
+  //   ]
+  // },
   {
     path: '/user',
     component: Layout,

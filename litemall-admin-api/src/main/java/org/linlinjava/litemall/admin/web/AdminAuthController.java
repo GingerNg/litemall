@@ -36,6 +36,7 @@ import static org.linlinjava.litemall.admin.util.AdminResponseCode.*;
 @RequestMapping("/admin/auth")
 @Validated
 public class AdminAuthController {
+    // logger, logging 专门管理日志的对象
     private final Log logger = LogFactory.getLog(AdminAuthController.class);
 
     @Autowired
@@ -51,6 +52,8 @@ public class AdminAuthController {
     public Object register(@RequestBody String body, HttpServletRequest request) {
         String username = JacksonUtil.parseString(body, "username");
         String password = JacksonUtil.parseString(body, "password");
+
+        logger.info("I am a info");
 
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             return ResponseUtil.badArgument();
@@ -90,6 +93,19 @@ public class AdminAuthController {
      */
     @PostMapping("/login")
     public Object login(@RequestBody String body, HttpServletRequest request) {
+        logger.info("----");
+        logger.info(body);  //  {"username":"admin123","password":"admin123"}
+        logger.info("----");
+
+        // 级别：ERROR > WARN > INFO > DEBUG
+        // 当我们的配置文件里定义我们的日志级别是INFO： 只有级别>=INFO的日志才会被打印出来
+        //(1) 三条都打印 （2）只打印 error
+        // 选择题： DEBUG， INFO, WARN, ERROR
+        // /
+        logger.info("I am a info");
+        logger.warn("I am a warn");
+        logger.error("I am a error");
+
         String username = JacksonUtil.parseString(body, "username");
         String password = JacksonUtil.parseString(body, "password");
 
@@ -138,6 +154,8 @@ public class AdminAuthController {
     @PostMapping("/logout")
     public Object logout() {
         Subject currentUser = SecurityUtils.getSubject();
+
+        logger.info("I am a info");
 
         logHelper.logAuthSucceed("退出");
         currentUser.logout();

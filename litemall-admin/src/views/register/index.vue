@@ -2,7 +2,7 @@
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <div class="title-container">
-        <h3 class="title">管理员登录</h3>
+        <h3 class="title">管理员注册</h3>
       </div>
       <el-form-item prop="username">
         <span class="svg-container">
@@ -18,7 +18,24 @@
         <el-input v-model="loginForm.password" :type="passwordType" name="password" auto-complete="on" tabindex="2" show-password placeholder="管理员密码" @keyup.enter.native="handleRegister" />
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleRegister">注册</el-button>
+      <el-form-item label="设置头像">
+        <el-upload
+          :headers="headers"
+          :action="uploadPath"
+          :show-file-list="false"
+          :on-success="uploadPicUrl"
+          class="avatar-uploader"
+          accept=".jpg,.jpeg,.png,.gif"
+        >
+          <img v-if="avataUrl" :src="avataUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon" />
+        </el-upload>
+      </el-form-item>
+
+      <div class="buttons">
+        <span><el-button :loading="loading" type="primary" style="width:49.5%;margin-bottom:30px;" @click.native.prevent="handleRegister">注册</el-button></span>
+        <span><el-button style="width:49.5%;margin-bottom:30px;"><a href="#/login">切换登陆</a></el-button></span>
+      </div>
 
     </el-form>
 
@@ -29,8 +46,10 @@
 </template>
 
 <script>
+import { uploadPath } from '@/api/storage'
+import { getToken } from '@/utils/auth'
 export default {
-  name: 'Login',
+  name: 'Register',
   data() {
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
@@ -40,6 +59,8 @@ export default {
       }
     }
     return {
+      uploadPath,
+      avataUrl: 'http://yanxuan.nosdn.127.net/1f67b1970ee20fd572b7202da0ff705d.png',
       loginForm: {
         username: 'admin123',
         password: 'admin123'
@@ -53,6 +74,13 @@ export default {
       },
       passwordType: 'password',
       loading: false
+    }
+  },
+  computed: {
+    headers() {
+      return {
+        'X-Litemall-Admin-Token': getToken()
+      }
     }
   },
   watch: {
@@ -71,6 +99,9 @@ export default {
     // window.removeEventListener('hashchange', this.afterQRScan)
   },
   methods: {
+    uploadPicUrl: function(response) {
+      this.avataUrl = response.data.url
+    },
     handleRegister() {
       this.$refs.loginForm.validate(valid => {
         if (valid && !this.loading) {
@@ -209,6 +240,20 @@ $light_gray:#eee;
       font-family: "PingFangSC-Semibold", sans-serif;
     }
   }
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  text-align: center;
+}
+.avatar {
+  width: 145px;
+  height: 145px;
+  display: block;
 }
 </style>
 
