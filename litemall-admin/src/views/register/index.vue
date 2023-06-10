@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+    <el-form ref="registerForm" :model="registerForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <div class="title-container">
         <h3 class="title">管理员注册</h3>
       </div>
@@ -8,20 +8,20 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input v-model="loginForm.username" name="username" type="text" tabindex="1" auto-complete="on" placeholder="管理员账户" />
+        <el-input v-model="registerForm.username" name="username" type="text" tabindex="1" auto-complete="on" placeholder="管理员账户" />
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input v-model="loginForm.password" :type="passwordType" name="password" auto-complete="on" tabindex="2" show-password placeholder="管理员密码" @keyup.enter.native="handleRegister" />
+        <el-input v-model="registerForm.password" :type="passwordType" name="password" auto-complete="on" tabindex="2" show-password placeholder="管理员密码" @keyup.enter.native="handleRegister" />
       </el-form-item>
 
       <el-form-item label="设置头像">
         <el-upload
           :headers="headers"
-          :action="uploadPath"
+          :action="imgV2UploadPath"
           :show-file-list="false"
           :on-success="uploadPicUrl"
           class="avatar-uploader"
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { uploadPath } from '@/api/storage'
+import { imgV2UploadPath } from '@/api/storage'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'Register',
@@ -59,11 +59,12 @@ export default {
       }
     }
     return {
-      uploadPath,
-      avataUrl: 'http://yanxuan.nosdn.127.net/1f67b1970ee20fd572b7202da0ff705d.png',
-      loginForm: {
+      imgV2UploadPath,
+      avataUrl: '',
+      registerForm: {
         username: 'admin123',
         password: 'admin123'
+        // avatarUrl: avataUrl
       },
       loginRules: {
         username: [{ required: true, message: '管理员账户不允许为空', trigger: 'blur' }],
@@ -103,13 +104,13 @@ export default {
       this.avataUrl = response.data.url
     },
     handleRegister() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.registerForm.validate(valid => {
         if (valid && !this.loading) {
           this.loading = true
           this.loading = false
           this.$router.push({ path: this.redirect || '/' })
 
-          // this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+          // this.$store.dispatch('LoginByUsername', this.registerForm).then(() => {
 
           // }).catch(response => {
           //   this.$notify.error({

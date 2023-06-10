@@ -52,6 +52,7 @@ public class AdminAuthController {
     public Object register(@RequestBody String body, HttpServletRequest request) {
         String username = JacksonUtil.parseString(body, "username");
         String password = JacksonUtil.parseString(body, "password");
+        // todo 新增头像url作为参数
 
         logger.info("I am a info");
 

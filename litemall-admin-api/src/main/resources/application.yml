@@ -9,14 +9,14 @@ user.filepath: /home/ubuntu/Projects/litemall/storage/
 server:
   port: 8083
 
-logging:
-  config: classpath:logback-spring.xml
-
 # logging:
-#   level:
-#     org.springframework:  DEBUG
-#     org.mybatis:  DEBUG
-#     org.linlinjava.litemall.admin:  ERROR
-#     org.linlinjava.litemall:  ERROR
-#   file:
-#       "logs"
+#   config: classpath:logback-spring.xml
+
+logging:
+  level:
+    org.springframework:  DEBUG
+    org.mybatis:  DEBUG
+    org.linlinjava.litemall.admin:  ERROR
+    org.linlinjava.litemall:  ERROR
+  file:
+      "logs"

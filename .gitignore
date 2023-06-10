@@ -53,3 +53,4 @@ Servers
 upload
 gen_code
 *.csv
+storage/*

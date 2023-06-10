@@ -40,5 +40,6 @@ export function deleteStorage(data) {
   })
 }
 
+const imgV2UploadPath = process.env.VUE_APP_BASE_API + '/imgV2/upload'
 const uploadPath = process.env.VUE_APP_BASE_API + '/storage/create'
-export { uploadPath }
+export { uploadPath, imgV2UploadPath }

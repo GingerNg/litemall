@@ -2,6 +2,7 @@ package org.linlinjava.litemall.admin.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.linlinjava.litemall.core.util.ResponseUtil;
@@ -44,8 +45,10 @@ public class AdminImgV2Controller implements WebMvcConfigurer{
             return ResponseUtil.ok("error");
         }
         // 返回图片的完整访问路径，这地方ip和端口可以改为动态获得，这样在部署到服务器上时无需改变，为了方便起见这里直接写死了
-        String returnUrl = "http://localhost:3000/admin/imgV2/"+uuid+fileSuffix;
-        return ResponseUtil.ok(returnUrl);
+        String returnUrl = "http://101.43.0.7:8083/admin/imgV2/"+uuid+fileSuffix;
+        HashMap dict = new HashMap();
+        dict.put("url", returnUrl);
+        return ResponseUtil.ok(dict);
     }
 
     // 自定义资源映射
