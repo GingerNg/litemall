@@ -49,11 +49,26 @@ org.springframework.core.io.Resource
 - url中的#符号
 在VUE中，路由的实现方式有两种，其中一种就是通过#标识符进行页面内导航从而实现路由切换
 [Vue路由切换的两种方式](https://blog.csdn.net/qq_51133939/article/details/126282421)
+
+### class7
+- 结束大作业-1的讲解
 - 读写CSV
 - 领域模型
 
+### class8-9
+- Mybatis
+- Configure
+- Create your MyBatis mapper interfaces and XML files that define your SQL queries.
+- Annotate your mapper interfaces with @Mapper to make them discoverable by Spring
+- 分页
 
 
+- 调用云存储？？？ 对象存储
+
+
+本地缓存Caffeine和远程缓存Redis实现二级缓存
+
+---------------------
 
 ### 权限管理
 - Shiro
@@ -61,10 +76,7 @@ org.springframework.core.io.Resource
 - 后端
 - 前端，
 
-### Mybatis
-- Configure
-- Create your MyBatis mapper interfaces and XML files that define your SQL queries.
-- Annotate your mapper interfaces with @Mapper to make them discoverable by Spring
+
 
 
 

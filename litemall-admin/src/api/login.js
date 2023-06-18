@@ -1,5 +1,18 @@
 import request from '@/utils/request'
 
+export function register(username, password, avatarUrl) {
+  const data = {
+    username,
+    password,
+    avatarUrl
+  }
+  return request({
+    url: '/auth/register',
+    method: 'post',
+    data
+  })
+}
+
 export function loginByUsername(username, password) {
   const data = {
     username,

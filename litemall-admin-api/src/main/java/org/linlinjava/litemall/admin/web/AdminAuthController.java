@@ -52,6 +52,7 @@ public class AdminAuthController {
     public Object register(@RequestBody String body, HttpServletRequest request) {
         String username = JacksonUtil.parseString(body, "username");
         String password = JacksonUtil.parseString(body, "password");
+        String avatarUrl = JacksonUtil.parseString(body, "avatarUrl");
         // todo 新增头像url作为参数
 
         logger.info("I am a info");
@@ -74,9 +75,13 @@ public class AdminAuthController {
         admin = new LitemallAdmin();
         admin.setUsername(username);
         admin.setPassword(encodedPassword);
-        admin.setAvatar("https://yanxuan.nosdn.127.net/80841d741d7fa3073e0ae27bf487339f.jpg?imageView&quality=90&thumbnail=64x64");
+        admin.setAvatar(avatarUrl);
 
-        // adminService.add(admin); //
+        Integer[] roleIds = {3};
+        admin.setRoleIds(roleIds);
+        // admin.setAvatar("https://yanxuan.nosdn.127.net/80841d741d7fa3073e0ae27bf487339f.jpg?imageView&quality=90&thumbnail=64x64");
+
+        adminService.add(admin);  // 将数据插入到数据库
 
         // adminInfo
         Map<String, Object> adminInfo = new HashMap<String, Object>();

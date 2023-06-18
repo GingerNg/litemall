@@ -1,4 +1,4 @@
-import { loginByUsername, logout, getUserInfo } from '@/api/login'
+import { loginByUsername, logout, getUserInfo, register } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -56,6 +56,20 @@ const user = {
           const token = response.data.data.token
           commit('SET_TOKEN', token)
           setToken(token)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
+    RegisterV1({ commit }, userInfo) {
+      const username = userInfo.username.trim()
+      return new Promise((resolve, reject) => {
+        register(username, userInfo.password, userInfo.avatarUrl).then(response => {
+          // const token = response.data.data.token  // login之后生成的token，用于验证当前用户是否已经登陆
+          // commit('SET_TOKEN', token)
+          // setToken(token)
           resolve()
         }).catch(error => {
           reject(error)

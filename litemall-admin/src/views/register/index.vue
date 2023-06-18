@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="registerForm" :model="registerForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
+    <el-form ref="registerForm" :model="registerForm" :rules="loginRules" class="register-form" auto-complete="on" label-position="left">
       <div class="title-container">
         <h3 class="title">管理员注册</h3>
       </div>
@@ -27,7 +27,7 @@
           class="avatar-uploader"
           accept=".jpg,.jpeg,.png,.gif"
         >
-          <img v-if="avataUrl" :src="avataUrl" class="avatar">
+          <img v-if="registerForm.avatarUrl" :src="registerForm.avatarUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
       </el-form-item>
@@ -47,7 +47,7 @@
 
 <script>
 import { imgV2UploadPath } from '@/api/storage'
-import { getToken } from '@/utils/auth'
+// import { getToken } from '@/utils/auth'
 export default {
   name: 'Register',
   data() {
@@ -60,18 +60,19 @@ export default {
     }
     return {
       imgV2UploadPath,
-      avataUrl: '',
+      // avatarUrl: '',  // 第二题
       registerForm: {
         username: 'admin123',
-        password: 'admin123'
-        // avatarUrl: avataUrl
+        password: 'admin123',
+        avatarUrl: ''
       },
       loginRules: {
         username: [{ required: true, message: '管理员账户不允许为空', trigger: 'blur' }],
         password: [
           { required: true, message: '管理员密码不允许为空', trigger: 'blur' },
           { validator: validatePassword, trigger: 'blur' }
-        ]
+        ],
+        avatarUrl: [{ required: true, message: '管理员头像不允许为空', trigger: 'blur' }]
       },
       passwordType: 'password',
       loading: false
@@ -80,7 +81,7 @@ export default {
   computed: {
     headers() {
       return {
-        'X-Litemall-Admin-Token': getToken()
+        // 'X-Litemall-Admin-Token': getToken()
       }
     }
   },
@@ -101,24 +102,21 @@ export default {
   },
   methods: {
     uploadPicUrl: function(response) {
-      this.avataUrl = response.data.url
+      this.registerForm.avatarUrl = response.data.url
     },
     handleRegister() {
       this.$refs.registerForm.validate(valid => {
         if (valid && !this.loading) {
           this.loading = true
-          this.loading = false
-          this.$router.push({ path: this.redirect || '/' })
-
-          // this.$store.dispatch('LoginByUsername', this.registerForm).then(() => {
-
-          // }).catch(response => {
-          //   this.$notify.error({
-          //     title: '失败',
-          //     message: response.data.errmsg
-          //   })
-          //   this.loading = false
-          // })
+          this.$store.dispatch('RegisterV1', this.registerForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' })
+          }).catch(response => {
+            this.$notify.error({
+              title: '失败',
+              message: response.data.errmsg
+            })
+            this.loading = false
+          })
         } else {
           return false
         }
@@ -186,7 +184,7 @@ $light_gray:#eee;
   background-color: $bg;
   overflow: hidden;
 
-  .login-form {
+  .register-form {
     position: relative;
     width: 520px;
     max-width: 100%;
